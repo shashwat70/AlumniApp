@@ -2,31 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
         <item android:id="@+id/nav_item_one"
-            android:icon="@drawable/logo"
-            android:title="Item 1" />
+            android:icon="@drawable/ic_profile"
+            android:title="My Profile" />
         <item android:id="@+id/nav_item_two"
-            android:icon="@drawable/logo"
-            android:title="Item 2" />
+            android:icon="@drawable/ic_message"
+            android:title="Inbox" />
         <item android:id="@+id/nav_item_three"
-            android:icon="@drawable/logo"
-            android:title="Item 3" />
+            android:icon="@drawable/ic_people"
+            android:title="Find People" />
+        <item android:id="@+id/nav_item_four"
+            android:icon="@drawable/ic_contacts"
+            android:title="Contacts" />
+        <item android:id="@+id/nav_item_five"
+            android:icon="@drawable/ic_news"
+            android:title="News and Updates" />
     </group>
 
     <group android:id="@+id/group_menu">
-        <item android:id="@+id/nav_item_four"
-            android:title="Item 4" />
-        <item android:id="@+id/nav_item_five"
-            android:title="Item 5" />
+        <item android:id="@+id/nav_item_six"
+            android:title="Credits" />
+        <item android:id="@+id/nav_item_seven"
+            android:title="About" />
+        <item android:id="@+id/nav_item_eight"
+            android:title="IIT Bhilai" />
     </group>
 
-    <item android:title="Title 1">
-        <menu>
-            <item android:id="@+id/nav_item_six"
-                android:icon="@drawable/logo"
-                android:title="Item 6" />
-            <item android:id="@+id/nav_item_seven"
-                android:icon="@drawable/logo"
-                android:title="Item 7" />
-        </menu>
-    </item>
 </menu>

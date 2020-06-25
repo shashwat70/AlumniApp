@@ -1,5 +1,7 @@
 package com.example.alumniapp
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +9,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -37,11 +40,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setHomeButtonEnabled(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu) : Boolean {
-        val inflater:MenuInflater=menuInflater
-        inflater.inflate(R.menu.main_menu,menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu) : Boolean {
+//        val inflater:MenuInflater=menuInflater
+//        inflater.inflate(R.menu.main_menu,menu)
+//        return true
+//    }
 
     override fun onOptionsItemSelected(item:MenuItem) : Boolean{
         when(item.itemId){
@@ -81,6 +84,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.main_menu, menu)
+        val searchViewItem = menu.findItem(R.id.search_icon)
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView: SearchView = searchViewItem.actionView as SearchView
+        searchView.setQueryHint("Search...")
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.setIconifiedByDefault(true)
+        return true
     }
 
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
