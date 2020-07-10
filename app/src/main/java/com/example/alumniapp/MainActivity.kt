@@ -1,16 +1,12 @@
 package com.example.alumniapp
 
-//import android.widget.Toolbar
-
 import android.app.SearchManager
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -19,7 +15,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AlertDialog.Builder
-import androidx.appcompat.widget.SearchView
+//import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import com.example.alumniapp.R
 //import com.example.alumniapp.fragment.*
 
@@ -191,6 +188,19 @@ class MainActivity : AppCompatActivity() {
 
             else -> super.onBackPressed()
         }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.main_menu, menu)
+        val searchViewItem = menu.findItem(R.id.search_icon)
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView: SearchView = searchViewItem.actionView as SearchView
+        searchView.setQueryHint("Search...")
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.setIconifiedByDefault(true)
+        return true
     }
 
 
