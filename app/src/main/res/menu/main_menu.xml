@@ -8,8 +8,8 @@
         app:showAsAction="ifRoom|withText"
         app:actionViewClass="android.widget.SearchView"/>
     <item
-        android:title="Option 1"
-        android:id="@+id/search"/>
+        android:title="New Message"
+        android:id="@+id/new_message"/>
     <item android:title="Option 2"/>
     <item android:title="Option 3"/>
     <item android:title="Option 4"/>

@@ -2,6 +2,7 @@ package com.example.alumniapp
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -17,12 +18,14 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AlertDialog.Builder
 //import androidx.appcompat.widget.SearchView
 import android.widget.SearchView
+import android.widget.Toast
 import com.example.alumniapp.R
+import com.google.firebase.auth.FirebaseAuth
+
 //import com.example.alumniapp.fragment.*
 
 
 class MainActivity : AppCompatActivity() {
-
 
     lateinit var drawerLayout: DrawerLayout
     lateinit var coordinatorLayout: CoordinatorLayout
@@ -31,41 +34,30 @@ class MainActivity : AppCompatActivity() {
     lateinit var navigationView: NavigationView
     var previousMenuItem:MenuItem?=null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         drawerLayout = findViewById(R.id.drawerLayout)
         coordinatorLayout = findViewById(R.id.coordinatorLayout)
         toolbar = findViewById(R.id.toolbar)
         frameLayout = findViewById(R.id.frame)
         navigationView = findViewById(R.id.navigationView)
-
-        openHome()
-        supportActionBar?.title="My Profile"
-
-
         setUpToolbar()
-
+        openInbox()
         val actionBarDrawerToggle=ActionBarDrawerToggle(this@MainActivity,drawerLayout,R.string.open_drawer,R.string.close_drawer)
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
-
         navigationView.setNavigationItemSelectedListener {
-
-
             if(previousMenuItem != null){
                 previousMenuItem?.isChecked=false
             }
             it.isCheckable=true
             it.isChecked=true
             previousMenuItem=it
-
             when(it.itemId)
             {
                 R.id.nav_item_one->{
-                    openHome()
+                    openInbox()
                     drawerLayout.closeDrawers()
 
                 }
@@ -85,7 +77,6 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.title="Inbox"
                     drawerLayout.closeDrawers()
                 }
-
                 R.id.nav_item_three->{
                     supportFragmentManager.beginTransaction().replace(R.id.frame,
                         FindFragment()
@@ -93,9 +84,6 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.title="Find People"
                     drawerLayout.closeDrawers()
                 }
-
-
-
                 R.id.nav_item_four->{
                     supportFragmentManager.beginTransaction().replace(R.id.frame,
                         ContactsFragment()
@@ -103,7 +91,6 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.title="Contacts"
                     drawerLayout.closeDrawers()
                 }
-
                 R.id.nav_item_five->{
                     supportFragmentManager.beginTransaction().replace(R.id.frame,
                         NewsFragment()
@@ -111,7 +98,6 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.title="News and Updates"
                     drawerLayout.closeDrawers()
                 }
-
                 R.id.nav_item_six->{
                     supportFragmentManager.beginTransaction().replace(R.id.frame,
                         CreditsFragment()
@@ -133,22 +119,13 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.title="IIT Bhilai"
                     drawerLayout.closeDrawers()
                 }
-
-
-
-
-
-
-
-
-
+                R.id.nav_item_nine->{
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
             }
-
-
-
-
-
-
             return@setNavigationItemSelectedListener true
         }
 
@@ -163,6 +140,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id=item.itemId
+        when(id){
+            R.id.new_message -> {
+                Toast.makeText(this, "New Message", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@MainActivity, NewMessageActivity::class.java)
+                startActivity(intent)
+            }
+        }
         if(id==android.R.id.home)
         {
             drawerLayout.openDrawer(GravityCompat.START)
@@ -170,13 +154,13 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun  openHome()
+    fun  openInbox()
     {
-        val fragment=ProfileFragment()
+        val fragment=InboxFragment()
         val transaction=supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frame,fragment)
         transaction.commit()
-        supportActionBar?.title="My Profile"
+        supportActionBar?.title="Inbox"
         navigationView.setCheckedItem(R.id.nav_item_one)
     }
 
@@ -184,7 +168,7 @@ class MainActivity : AppCompatActivity() {
         val frag = supportFragmentManager.findFragmentById(R.id.frame)
 
         when(frag){
-            !is ProfileFragment -> openHome()
+            !is InboxFragment -> openInbox()
 
             else -> super.onBackPressed()
         }
