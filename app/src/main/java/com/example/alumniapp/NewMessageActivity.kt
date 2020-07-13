@@ -1,5 +1,6 @@
 package com.example.alumniapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -41,15 +42,19 @@ class NewMessageActivity : AppCompatActivity() {
                     if(user!=null)
                         adapter.add(UserItem(user))
                 }
+                adapter.setOnItemClickListener{ item, view ->
+                    val userItem = item as UserItem
+                    val intent = Intent(view.context, ChatLogActivity::class.java)
+                    intent.putExtra("USER", userItem.user)
+
+                    startActivity(intent)
+                    finish()
+                }
                 recyclerview_newmessage.adapter = adapter
             }
 
         })
     }
-}
-
-class User(val firstName:String, val lastName:String) {
-    constructor() : this("","")
 }
 
 class UserItem(val user:User) : Item<GroupieViewHolder>() {
