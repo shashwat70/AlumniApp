@@ -65,7 +65,7 @@ class ChatLogActivity : AppCompatActivity() {
                     else
                         adapter.add(ChatFromItem(chatMessage.text))
                 }
-
+                recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
