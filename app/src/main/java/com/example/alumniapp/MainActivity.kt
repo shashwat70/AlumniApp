@@ -49,7 +49,9 @@ class MainActivity : AppCompatActivity() {
         navigationView = findViewById(R.id.navigationView)
         setUpToolbar()
         supportActionBar?.title="Inbox"
-        navigationView.setCheckedItem(R.id.nav_item_one)
+       // navigationView.setCheckedItem(R.id.nav_item_one)
+        navigationView.setCheckedItem(R.id.nav_item_two)
+        navigationView.getMenu().getItem(1).setChecked(true);
         val actionBarDrawerToggle=ActionBarDrawerToggle(this@MainActivity,drawerLayout,R.string.open_drawer,R.string.close_drawer)
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
@@ -65,12 +67,12 @@ class MainActivity : AppCompatActivity() {
             {
                 R.id.nav_item_one->{
                     supportActionBar?.title="My Profile"
-                    navigationView.setCheckedItem(R.id.nav_item_one)
+                  //  navigationView.setCheckedItem(R.id.nav_item_one)
                     drawerLayout.closeDrawers()
                 }
 
                 R.id.nav_item_two->{
-
+                    navigationView.setCheckedItem(R.id.nav_item_two)
                     supportActionBar?.title="Inbox"
                     drawerLayout.closeDrawers()
                 }
