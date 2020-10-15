@@ -3,7 +3,7 @@
     android:id="@+id/nav_header"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="@color/colorAccent"
+    android:background="#6200EE"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -26,3 +26,7 @@
         android:text="Alumni Name Goes Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 </LinearLayout>
+
+
+
+

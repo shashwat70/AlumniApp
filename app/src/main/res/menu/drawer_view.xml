@@ -16,17 +16,22 @@
         <item android:id="@+id/nav_item_five"
             android:icon="@drawable/ic_news"
             android:title="News and Updates" />
-    </group>
-
-    <group android:id="@+id/group_menu">
         <item android:id="@+id/nav_item_six"
+            android:icon="@drawable/ic_credits"
             android:title="Credits" />
         <item android:id="@+id/nav_item_seven"
-            android:title="About" />
+            android:title="About"
+            android:icon="@drawable/ic_about"/>
         <item android:id="@+id/nav_item_eight"
+            android:icon="@drawable/ic_iitb"
             android:title="IIT Bhilai" />
         <item android:id="@+id/nav_item_nine"
-            android:title="Sign Out" />
+            android:title="Sign Out"
+            android:icon="@drawable/ic_logout"/>
     </group>
+
+
+
+
 
 </menu>
